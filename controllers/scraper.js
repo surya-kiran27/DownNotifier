@@ -18,7 +18,7 @@ async function checkState() {
   });
   console.log("company list", data);
   data.forEach(async (obj) => {
-    if (obj.company === "Rust") {
+    if (obj.company === "Instagram") {
       await page.goto(`https://downdetector.com/${obj.link}`);
       await page.waitForSelector(".chartjs-render-monitor");
       const dataUrlChart = await page.evaluate(() => {
