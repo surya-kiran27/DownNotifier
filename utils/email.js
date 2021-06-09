@@ -1,4 +1,3 @@
-console.log(process.env.MAILGUN);
 let api_key = process.env.MAILGUN;
 let domain = "mail.doctorjarvee.com";
 let mailgun = require("mailgun-js")({ apiKey: api_key, domain: domain });
