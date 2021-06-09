@@ -6,7 +6,7 @@ const luxon = require("luxon");
 const { sendBulk } = require("../utils/email");
 async function checkState() {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     args: [
       "--disable-gpu",
       "--disable-dev-shm-usage",
@@ -69,7 +69,10 @@ async function checkState() {
   if (browser != null) await browser.close();
 }
 
-const job = schedule.scheduleJob("*/5 * * * *", checkState);
+const job = schedule.scheduleJob(
+  `*/${process.env.interval || 1} * * * *`,
+  checkState
+);
 
 async function status() {
   const eventDoc = await Event.findOne(
