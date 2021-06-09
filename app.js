@@ -10,7 +10,10 @@ var usersRouter = require("./routes/users");
 var statusRouter = require("./routes/status");
 var app = express();
 
-var whitelist = ["http://localhost:3000", "http://example2.com"];
+var whitelist = [
+  "http://localhost:3000",
+  "https://down-notifier.herokuapp.com/",
+];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   console.log("origin", req.header("Origin"));
