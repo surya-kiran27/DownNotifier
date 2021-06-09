@@ -12,7 +12,7 @@ var app = express();
 
 var whitelist = [
   "http://localhost:3000",
-  "https://down-notifier.herokuapp.com/",
+  "https://down-notifier.herokuapp.com",
 ];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
