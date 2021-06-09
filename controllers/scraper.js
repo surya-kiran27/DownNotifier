@@ -57,7 +57,7 @@ async function checkState() {
   if (browser != null) await browser.close();
 }
 
-const job = schedule.scheduleJob("*/1 * * * *", checkState);
+const job = schedule.scheduleJob("*/5 * * * *", checkState);
 
 async function status() {
   const eventDoc = await Event.findOne(
