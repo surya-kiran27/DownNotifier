@@ -38,7 +38,6 @@ async function checkState() {
 
     let base64String = dataUrlChart.substr(dataUrlChart.indexOf(",") + 1); // get everything after the comma
     let imgBuffer = Buffer.from(base64String, "base64"); //
-    fs.writeFileSync("image.png", imgBuffer);
     let published = await page.$eval(".date", (el) => el.innerText);
     published = published.split(": ")[1].trim();
     published = published.slice(0, -1);
@@ -51,10 +50,8 @@ async function checkState() {
       await sendBulk({ info, published, image: imgBuffer });
     } else {
       const { createdAt, originTime } = eventDoc;
-      const luxonCreatedAt = luxon.DateTime.fromJSDate(createdAt);
-      const luxonCurrentTime = luxon.DateTime.fromISO(new Date().toISOString());
-      const diff = luxonCurrentTime.diff(luxonCreatedAt, "hours").toObject();
-      if (diff.hours > 24 && published !== originTime) {
+      console.log("published", published, "originTime", originTime);
+      if (published !== originTime) {
         await Event.create({ status: info, originTime: published });
         await sendBulk({ info, published, image: imgBuffer });
         //send email
