@@ -1,4 +1,4 @@
-let api_key = process.env.MAILGUN;
+let api_key = process.env.MAILGUN ?? "1234";
 let domain = "mail.doctorjarvee.com";
 let mailgun = require("mailgun-js")({ apiKey: api_key, domain: domain });
 const { Subscription } = require("../models");

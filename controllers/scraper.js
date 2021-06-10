@@ -26,15 +26,10 @@ async function checkState() {
       return { company: `${td.innerText}`, link: td.getAttribute("href") };
     });
   });
-  console.log("company list", data);
-  let link = "";
-  data.forEach((obj) => {
-    if (obj.company === "Instagram") {
-      link = obj.link;
-    }
-  });
-  if (link !== "") {
-    await page.goto(`https://downdetector.com/${link}`);
+  let instagram = data.find((obj) => obj.company === "Instagram");
+  console.log("instagram", instagram);
+  if (instagram) {
+    await page.goto(`https://downdetector.com/${instagram.link}`);
     await page.waitForSelector(".chartjs-render-monitor");
     const dataUrlChart = await page.evaluate(() => {
       const canvas = document.querySelector(".chartjs-render-monitor");
