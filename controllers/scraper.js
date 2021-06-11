@@ -44,7 +44,7 @@ async function checkState() {
     //text-justify
     let info = await page.$eval(".text-justify", (el) => el.innerText);
     info = info.split(".")[0];
-    const eventDoc = await Event.findOne({}).sort({ createdAt: -1 });
+    const eventDoc = await Event.findOne({}).sort({ _id: -1 });
     if (!eventDoc) {
       await Event.create({ status: info, originTime: published });
       await sendBulk({ info, published, image: imgBuffer });
