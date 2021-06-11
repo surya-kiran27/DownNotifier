@@ -16,7 +16,7 @@ async function checkState() {
     ],
   });
   let page = await browser.newPage();
-  await page.goto("https://downdetector.com/archive/");
+  await page.goto("https://downdetector.com/status/instagram/archive/");
 
   await (await page.waitForSelector("#_evidon-banner-acceptbutton")).click();
 
