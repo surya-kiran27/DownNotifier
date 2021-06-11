@@ -44,18 +44,11 @@ async function checkState() {
     //text-justify
     let info = await page.$eval(".text-justify", (el) => el.innerText);
     info = info.split(".")[0];
-    const eventDoc = await Event.findOne({}).sort({ _id: -1 });
+    const eventDoc = await Event.findOne({ originTime: published });
+    console.log("published", published, "eventDoc", eventDoc);
     if (!eventDoc) {
       await Event.create({ status: info, originTime: published });
       await sendBulk({ info, published, image: imgBuffer });
-    } else {
-      const { createdAt, originTime } = eventDoc;
-      console.log("published", published, "originTime", originTime);
-      if (published !== originTime) {
-        await Event.create({ status: info, originTime: published });
-        await sendBulk({ info, published, image: imgBuffer });
-        //send email
-      }
     }
   }
   if (browser != null) await browser.close();
