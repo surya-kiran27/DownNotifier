@@ -6,7 +6,7 @@ const luxon = require("luxon");
 const { sendBulk } = require("../utils/email");
 async function checkState() {
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: [
       "--disable-gpu",
       "--disable-dev-shm-usage",
@@ -33,10 +33,10 @@ async function checkState() {
     let instagram = data.find((obj) => obj.company === "Instagram");
     console.log("instagram", instagram);
     if (instagram) {
-      await page.goto(`https://downdetector.com/${instagram.link}`);
+      await page.goto(`https://downdetector.com${instagram.link}`);
       await page.waitForSelector(".chartjs-render-monitor");
       const dataUrlChart = await page.evaluate(() => {
-        const canvas = document.querySelector(".chartjs-render-monitor");
+        const canvas = document.querySelector("#holder");
         return canvas.toDataURL();
       });
 
