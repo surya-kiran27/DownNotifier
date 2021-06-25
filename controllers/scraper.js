@@ -6,7 +6,7 @@ const luxon = require("luxon");
 const { sendBulk } = require("../utils/email");
 async function checkState() {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     args: [
       "--disable-gpu",
       "--disable-dev-shm-usage",
