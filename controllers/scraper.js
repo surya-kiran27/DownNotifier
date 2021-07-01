@@ -34,7 +34,7 @@ async function checkState() {
     console.log("instagram", instagram);
     if (instagram) {
       await page.goto(`https://downdetector.com${instagram.link}`);
-      await page.waitForSelector(".chartjs-render-monitor");
+      await page.waitForSelector("#holder");
       const dataUrlChart = await page.evaluate(() => {
         const canvas = document.querySelector("#holder");
         return canvas.toDataURL();
